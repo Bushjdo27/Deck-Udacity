@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View , AsyncStorage} from 'react-native';
-import Deck from './components/Deck'
+import MainRoute from './AppRoute/index';
+import SplashScreen from './components/SplashScreen'
 const DATA = {
   React: {
     title: 'React',
@@ -28,39 +29,8 @@ const DATA = {
 
 class App extends React.Component {
   
-  constructor(props){
-    super(props);
-    this.state = {
-      data: {}
-    }
-  }
-
-  componentDidMount(){
-    // AsyncStorage.setItem('Data',JSON.stringify(DATA)).then(()=>{
-    //   console.log('Add Success')
-    // })
-    AsyncStorage.getItem('Data').then((result)=>{
-      const data = JSON.parse(result);
-      this.setState({data})
-      console.log("Get item success")
-    }).catch((e)=>{
-      console.log('Cant not read data')
-    })
-  }
   render() {
-    const {data} = this.state
-    return (
-      <View style={styles.container}>
-          {data && Object.keys(data).map((deck , index)=>{
-            return (
-              <View key={index}>
-                <Text>{data[deck].title}</Text>
-                <Text>have : {data[deck].questions.length} question</Text>
-              </View>
-            )
-          })}
-      </View>
-    );
+    return  <MainRoute />
   }
 }
 
